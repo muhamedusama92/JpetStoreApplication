@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'muhamedusama92/jpetstore-app:v3.0'
+        DOCKER_IMAGE = 'muhamedusama92/jpetstore-app:v2.0'
     }
 
     stages {
