@@ -1,5 +1,5 @@
 - name: Deploy Dockerized JPetStore App
-  hosts: web
+  hosts: webservers
   become: true
 
   tasks:
