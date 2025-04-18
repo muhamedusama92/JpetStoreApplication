@@ -11,6 +11,14 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/muhamedusama92/JpetStoreApplication.git'
             }
         }
+        stage('Provision Infrastructure') {
+            steps {
+            dir('infrastructure') { // assuming your main.tf is in a folder called "infrastructure"
+                sh 'terraform init'
+                sh 'terraform apply -auto-approve'
+                }
+            }
+        }
 
         stage('Build with Maven') {
             steps {
