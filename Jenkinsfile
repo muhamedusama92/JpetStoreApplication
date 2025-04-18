@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/muhamedusama92/JpetStoreApplication.git'
+                git branch: 'main', url: 'https://github.com/muhamedusama92/JpetStoreApplication.git'
             }
         }
 
