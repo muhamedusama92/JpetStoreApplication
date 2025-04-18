@@ -17,13 +17,13 @@
     - name: Pull Docker image from Docker Hub
       docker_image:
         name: muhamedusama92/jpetstore-app
-        tag: v3.0
+        tag: v2.0
         source: pull
 
     - name: Run JPetStore container
       docker_container:
         name: jpetstore
-        image: muhamedusama92/jpetstore-app:v3.0
+        image: muhamedusama92/jpetstore-app:v2.0
         state: started
         restart_policy: always
         ports:
