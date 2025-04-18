@@ -39,7 +39,6 @@ pipeline {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'ansible-ssh-key', keyFileVariable: 'SSH_KEY')]) {
                     sh '''
-                        // ssh-keyscan -H 3.84.125.110 >> ~/.ssh/known_hosts
                         ansible-playbook -i ec2-hosts.ini deploy.yml --private-key $SSH_KEY
                     '''
                 }
