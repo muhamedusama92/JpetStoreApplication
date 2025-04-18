@@ -1,0 +1,30 @@
+- name: Deploy Dockerized JPetStore App
+  hosts: web
+  become: true
+
+  tasks:
+    - name: Ensure Docker is installed
+      yum:
+        name: docker
+        state: present
+
+    - name: Start and enable Docker
+      systemd:
+        name: docker
+        enabled: true
+        state: started
+
+    - name: Pull Docker image from Docker Hub
+      docker_image:
+        name: muhamedusama92/jpetstore-app
+        tag: v3.0
+        source: pull
+
+    - name: Run JPetStore container
+      docker_container:
+        name: jpetstore
+        image: muhamedusama92/jpetstore-app:v3.0
+        state: started
+        restart_policy: always
+        ports:
+          - "8080:8080"
