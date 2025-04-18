@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/your-username/jpetstore' // Replace if needed
+                git 'https://github.com/muhamedusama92/JpetStoreApplication.git'
             }
         }
 
@@ -26,9 +26,9 @@ pipeline {
 
         stage('Docker Login & Push') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh '''
-                        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                        docker login -u $DOCKER_USER -p $DOCKER_PASS
                         docker push $DOCKER_IMAGE
                     '''
                 }
