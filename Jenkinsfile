@@ -11,12 +11,20 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/muhamedusama92/JpetStoreApplication.git'
             }
         }
+
         stage('Provision Infrastructure') {
             steps {
-            dir('infrastructure') { // assuming your main.tf is in a folder called "infrastructure"
+            dir('infrastructure') {
                 sh 'terraform init'
                 sh 'terraform apply -auto-approve'
                 }
+            }
+        }
+
+        stage('Generate Inventory') {
+            steps {
+                sh 'chmod +x generate_inventory.sh'
+                sh './generate_inventory.sh'
             }
         }
 
@@ -47,7 +55,7 @@ pipeline {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'ansible-ssh-key', keyFileVariable: 'SSH_KEY')]) {
                     sh '''
-                        ansible-playbook -i ec2-hosts.ini deploy.yml --private-key $SSH_KEY
+                        ansible-playbook -i inventory.ini deploy.yml --private-key $SSH_KEY
                     '''
                 }
             }
