@@ -5,13 +5,6 @@ pipeline {
         DOCKER_IMAGE = 'muhamedusama92/jpetstore-app:v2.0'
     }
 
-    stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/muhamedusama92/JpetStoreApplication.git'
-            }
-        }
-
         stage('Provision Infrastructure') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'aws-creds', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]){
