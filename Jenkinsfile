@@ -29,8 +29,10 @@ pipeline {
 
         stage('Generate Inventory') {
             steps {
-                sh 'chmod +x generate-inventory.sh'
-                sh './generate-inventory.sh'
+                dir('infrastructure'){
+                    sh 'chmod +x generate-inventory.sh'
+                    sh './generate-inventory.sh'
+                }
             }
         }
 
@@ -61,7 +63,7 @@ pipeline {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'ansible-ssh-key', keyFileVariable: 'SSH_KEY')]) {
                     sh '''
-                        ansible-playbook -i inventory.ini deploy.yml --private-key $SSH_KEY
+                        ansible-playbook -i infrastructure/inventory.ini deploy.yml --private-key $SSH_KEY
                     '''
                 }
             }
