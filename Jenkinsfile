@@ -18,6 +18,7 @@ pipeline {
                     dir('infrastructure') {
                         sh '''
                              terraform init
+                             terraform destroy -auto-approve
                              terraform plan
                              terraform apply -auto-approve
                         '''
@@ -28,8 +29,8 @@ pipeline {
 
         stage('Generate Inventory') {
             steps {
-                sh 'chmod +x generate_inventory.sh'
-                sh './generate_inventory.sh'
+                sh 'chmod +x generate-inventory.sh'
+                sh './generate-inventory.sh'
             }
         }
 
