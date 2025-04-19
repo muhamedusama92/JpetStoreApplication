@@ -3,6 +3,9 @@
 # Fetch public IP from Terraform output
 IP=$(terraform output -raw webserver_public_ip)
 
+# First-time SSH to accept host key
+ssh -o StrictHostKeyChecking=no -i ~/.ssh/my-key ec2-user@$IP "echo Host key accepted"
+
 # Create inventory.ini
 cat <<EOF > inventory.ini
 [webservers]
