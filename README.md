@@ -1,5 +1,5 @@
 
-# DevOps Graduation Project - CI/CD Pipeline for Dockerized JPetStore App
+# DevOps Graduation Project - CI/CD Pipeline for A Java Web App (JPetStore)
 
 ## Project Overview
 
@@ -72,7 +72,7 @@ This project demonstrates a complete DevOps pipeline that automates the provisio
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/your-username/devops-graduation-project.git
+   git clone https://github.com/muhamedusama92/JpetstoreApplication.git
    ```
 
 2. **Configure AWS Credentials**
