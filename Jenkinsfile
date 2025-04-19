@@ -14,9 +14,13 @@ pipeline {
 
         stage('Provision Infrastructure') {
             steps {
-            dir('infrastructure') {
-                sh 'terraform init'
-                sh 'terraform apply -auto-approve'
+                withCredentials([usernamePassword(credentialsId: 'aws-creds', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]){
+                    dir('infrastructure') {
+                        sh '''
+                             terraform init
+                             terraform plan
+                             terraform apply -auto-approve
+                        '''}
                 }
             }
         }
